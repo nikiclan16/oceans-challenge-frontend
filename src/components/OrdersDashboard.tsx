@@ -31,12 +31,12 @@ export default function OrdersDashboard() {
             Fecha: {new Date(order.created_at).toLocaleString()}
           </p>
           <p className="font-semibold text-lg mb-2">
-            Total: ${order.total.toFixed(2)}
+            Total: ${(+order.total).toFixed(2)}
           </p>
           <ul className="ml-4 list-disc text-sm">
             {order.products.map((prod) => (
               <li key={prod.id}>
-                {prod.name} - ${prod.price.toFixed(2)}
+                {prod.name} - ${(+prod.price).toFixed(2)}
               </li>
             ))}
           </ul>

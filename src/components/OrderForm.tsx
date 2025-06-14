@@ -58,7 +58,7 @@ export default function OrderForm() {
                 onChange={() => toggleProduct(p.id)}
                 className="mr-2"
               />
-              {p.name} - ${p.price.toFixed(2)}
+              {p.name} - ${(+p.price).toFixed(2)}
             </label>
           </li>
         ))}
