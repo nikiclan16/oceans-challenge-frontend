@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+
 import { registerUser } from "../services/userService";
+import { toast, ToastContainer } from "react-toastify";
 
 const schema = z.object({
   username: z.string().min(1, "Usuario requerido"),
@@ -13,7 +14,6 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function UserForm() {
-  const [message, setMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -24,10 +24,10 @@ export default function UserForm() {
   const onSubmit = async (data: FormData) => {
     try {
       await registerUser(data);
-      setMessage("✅ Usuario creado correctamente");
+      toast.success("Usuario creado correctamente");
       reset();
     } catch (err) {
-      setMessage("❌ Error al crear usuario");
+      toast.error("Error al crear usuario");
       console.error("error al registrar usuario:", err);
     }
   };
@@ -37,11 +37,18 @@ export default function UserForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-md mx-auto space-y-4 mt-8"
     >
-      <h2 className="text-xl font-bold">Registrar nuevo usuario</h2>
+      <ToastContainer />
+      <h2 className="text-xl font-semibold text-center">
+        Registrar nuevo usuario
+      </h2>
 
       <div>
         <label>Usuario</label>
-        <input {...register("username")} className="w-full border p-2" />
+        <input
+          {...register("username")}
+          className="w-full border p-2"
+          placeholder="user001"
+        />
         {errors.username && (
           <p className="text-red-500">{errors.username.message}</p>
         )}
@@ -53,6 +60,7 @@ export default function UserForm() {
           type="password"
           {...register("password")}
           className="w-full border p-2"
+          placeholder="123456"
         />
         {errors.password && (
           <p className="text-red-500">{errors.password.message}</p>
@@ -68,14 +76,14 @@ export default function UserForm() {
         {errors.role && <p className="text-red-500">{errors.role.message}</p>}
       </div>
 
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Crear Usuario
-      </button>
-
-      {message && <p className="mt-2">{message}</p>}
+      <div className="w-full flex justify-end">
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Crear Usuario
+        </button>
+      </div>
     </form>
   );
 }
