@@ -15,9 +15,18 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="p-4">
+      <div className="mt-6">
         <Routes>
-          <Route path="/products" element={<Products />} />
+          <Route
+            path="/products"
+            element={
+              <PrivateRoute>
+                <AdminRoute>
+                  <Products />
+                </AdminRoute>
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/new-order"
             element={
@@ -26,14 +35,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<p>Página no encontrada</p>} />
           <Route path="/login" element={<Login />} />
           <Route

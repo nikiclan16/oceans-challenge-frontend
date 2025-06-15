@@ -36,40 +36,49 @@ export default function LoginForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-sm mx-auto mt-8 space-y-4"
-    >
-      <h2 className="text-xl font-bold">Iniciar Sesión</h2>
-
-      <div>
-        <label>Usuario</label>
-        <input {...register("username")} className="w-full p-2 border" />
-        {errors.username && (
-          <p className="text-red-500">{errors.username.message}</p>
-        )}
-      </div>
-
-      <div>
-        <label>Contraseña</label>
-        <input
-          type="password"
-          {...register("password")}
-          className="w-full p-2 border"
-        />
-        {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+    <div className="flex justify-center items-center min-h-screen">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-sm mx-auto mt-8 space-y-4"
       >
-        Ingresar
-      </button>
+        <h2 className="text-xl font-bold text-center">Iniciar Sesión</h2>
 
-      {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
-    </form>
+        <div>
+          <label>Usuario</label>
+          <input
+            {...register("username")}
+            className="w-full p-2 border"
+            placeholder="admin"
+          />
+          {errors.username && (
+            <p className="text-red-500">{errors.username.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label>Contraseña</label>
+          <input
+            type="password"
+            {...register("password")}
+            className="w-full p-2 border"
+            placeholder="123"
+          />
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+        </div>
+
+        <div className="flex w-full justify-end">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Ingresar
+          </button>
+        </div>
+
+        {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
+      </form>
+    </div>
   );
 }
