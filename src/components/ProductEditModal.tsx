@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { updateProduct } from "../services/productService";
+import { toast } from "react-toastify";
 
 interface Props {
   product: { id: number; name: string; price: number };
@@ -16,9 +17,14 @@ export default function ProductEditModal({
   const [price, setPrice] = useState(product.price);
 
   const handleSubmit = async () => {
-    await updateProduct(product.id, { name, price });
-    onUpdated();
-    onClose();
+    try {
+      const res = await updateProduct(product.id, { name, price });
+      toast.success(`${res.name} editado correctamente`);
+      onUpdated();
+      onClose();
+    } catch (error) {
+      console.error("error al editar producto:", error);
+    }
   };
 
   return (
@@ -40,6 +46,7 @@ export default function ProductEditModal({
         <input
           type="number"
           className="border w-full mb-4 p-2 bg-white  text-black"
+          step="1000"
           placeholder="1000"
           value={price}
           onChange={(e) => setPrice(parseFloat(e.target.value))}

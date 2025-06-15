@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { deleteProductById } from "../services/productService";
 
 interface Props {
@@ -12,9 +13,14 @@ export default function ProductDeleteModal({
   onDeleted,
 }: Props) {
   const handleDelete = async () => {
-    await deleteProductById(product.id);
-    onDeleted();
-    onClose();
+    try {
+      const res = await deleteProductById(product.id);
+      toast.success(`${res.name} eliminado correctamente`);
+      onDeleted();
+      onClose();
+    } catch (error) {
+      console.error("error al eliminar producto:", error);
+    }
   };
 
   return (
