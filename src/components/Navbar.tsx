@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 export default function Navbar() {
   const navigate = useNavigate();
 
-  const { isAuthenticated, role } = useAuth();
+  const { isAuthenticated, role, username } = useAuth();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -54,7 +54,12 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="ml-auto">
+          <div className="ml-auto flex gap-6">
+            <div>
+              <p className="capitalize">
+                {username} <span className="text-xs">({role})</span>
+              </p>
+            </div>
             <button
               onClick={handleLogout}
               className="text-sm text-red-300 hover:text-red-100"
