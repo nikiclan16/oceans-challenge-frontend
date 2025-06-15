@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getOrders } from "../services/orderService";
-import OrderDeleteModal from "./OrderDeleteModal";
+import { getOrders } from "../../../services/orderService";
 import { ToastContainer } from "react-toastify";
+import OrderDeleteModal from "../modals/OrderDeleteModal";
 
 interface Order {
   order_id: number;

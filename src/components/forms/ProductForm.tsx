@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { createProduct } from "../services/productService";
 import { toast } from "react-toastify";
+import { createProduct } from "../../services/productService";
 
 const schema = z.object({
   name: z.string().min(1, "Nombre requerido"),

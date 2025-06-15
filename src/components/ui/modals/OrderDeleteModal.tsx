@@ -1,21 +1,21 @@
 import { toast } from "react-toastify";
-import { deleteProductById } from "../services/productService";
+import { deleteOrder } from "../../../services/orderService";
 
 interface Props {
-  product: { id: number; name: string; price: number };
+  orderId: number;
   onClose: () => void;
   onDeleted: () => void;
 }
 
-export default function ProductDeleteModal({
-  product,
+export default function OrderDeleteModal({
+  orderId,
   onClose,
   onDeleted,
 }: Props) {
   const handleDelete = async () => {
     try {
-      const res = await deleteProductById(product.id);
-      toast.success(`${res.name} eliminado correctamente`);
+      await deleteOrder(orderId);
+      toast.success("orden eliminada correctamente");
       onDeleted();
       onClose();
     } catch (error) {
@@ -25,11 +25,11 @@ export default function ProductDeleteModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded shadow-lg w-80">
-        <h2 className="text-lg font-bold mb-4 text-red-600">
-          ¿Desea eliminar el producto {product.name}?
+      <div className="bg-white p-6 rounded shadow-md w-80">
+        <h2 className="text-lg font-semibold mb-4  text-red-600">
+          ¿Eliminar esta orden?
         </h2>
-        <p className="mb-6 text-sm text-gray-600">
+        <p className="text-sm text-gray-600 mb-6">
           Esta acción no se puede deshacer.
         </p>
         <div className="flex justify-end space-x-2">

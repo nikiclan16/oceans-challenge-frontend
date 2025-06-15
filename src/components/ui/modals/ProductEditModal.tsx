@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { updateProduct } from "../services/productService";
 import { toast } from "react-toastify";
+import { updateProduct } from "../../../services/productService";
 
 interface Props {
   product: { id: number; name: string; price: number };

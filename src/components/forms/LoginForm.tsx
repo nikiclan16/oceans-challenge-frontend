@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "../services/authService";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { onLogin } from "../../services/authService";
+import { useAuthStore } from "../../stores/auth/useAuthStore";
 
 const schema = z.object({
   username: z.string().min(1, "Usuario requerido"),
@@ -20,14 +21,15 @@ export default function LoginForm() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-
+  const { setUser } = useAuthStore();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await login(data.username, data.password);
-      localStorage.setItem("token", res.token);
+      const res = await onLogin(data.username, data.password);
+      setUser(res.token);
+
       navigate("/dashboard");
     } catch (err) {
       setErrorMessage("Usuario o contraseña incorrectos");

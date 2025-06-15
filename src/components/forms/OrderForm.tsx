@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/productService";
-import { createOrder } from "../services/orderService";
+
 import { toast, ToastContainer } from "react-toastify";
+import { getProducts } from "../../services/productService";
+import { createOrder } from "../../services/orderService";
 
 interface Product {
   id: number;

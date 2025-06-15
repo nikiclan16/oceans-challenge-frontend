@@ -1,4 +1,4 @@
-import OrdersDashboard from "../components/OrdersDashboard";
+import OrdersDashboard from "../components/ui/common/OrdersDashboard";
 
 export default function Dashboard() {
   return <OrdersDashboard />;
