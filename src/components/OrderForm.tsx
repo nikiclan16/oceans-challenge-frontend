@@ -57,7 +57,7 @@ export default function OrderForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-6">
+    <div className="max-w-2xl mx-auto mt-6 border-2 border-dashed border-gray-500 p-4 rounded shadow-sm">
       <ToastContainer />
       <h2 className="text-xl font-semibold mb-4 text-center">Crear Orden</h2>
       <ul className="mb-4">
